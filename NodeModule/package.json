@@ -1,0 +1,20 @@
+{
+  "name": "gettingstarted",
+  "version": "1.0.0",
+  "description": "Training With Node",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node index.ts",
+    "dev": "ts-node index.ts"
+  },
+  "author": "MayankGupta",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^24.3.0",
+    "randomize": "^0.0.4",
+    "ts-node": "^10.9.2",
+    "tsc": "^2.0.4",
+    "typescript": "^5.9.2"
+  }
+}
