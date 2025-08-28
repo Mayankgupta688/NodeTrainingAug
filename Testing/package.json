@@ -1,0 +1,19 @@
+{
+  "name": "testing",  
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "debug": "node --inspect-brk ./node_modules/jest/bin/jest.js -i"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@jest/types": "^30.0.5",
+    "express": "^5.1.0",
+    "jest": "^30.1.1",
+    "supertest": "^7.1.4"
+  }
+}

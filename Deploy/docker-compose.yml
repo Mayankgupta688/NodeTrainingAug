@@ -1,0 +1,15 @@
+services:
+  nodeapp:
+    build: ./app
+    image: node-app:latest
+    container_name: node-app
+    expose:
+      - "3000"
+
+  nginx:
+    build:
+      context: ./nginx
+    image: nginx-proxy:latest
+    container_name: nginx-proxy
+    ports:
+      - "8080:80"

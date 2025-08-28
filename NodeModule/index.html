@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+    <body>
+        
+        
+        <div class="container-fluid" style="margin: 20px; border: none;">
+            <div class="row" style="height: 600px;">
+                <div class="col-8" style="padding: 10px;border: 1px solid red;" id="user_messages">
+                    
+                </div>
+                <div class="col-3" style="padding: 10px;border: 1px solid red;margin-left: 15px;">
+                    <input type="text" id="input_data" style="width: 100%" /><br/><br/>
+                    <input type="button" id="input_button" value="Click To Send Message" onclick="emitDataFromBrowser()" /><br/><br/>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            var socket = null;
+            var stream = "Education"
+            var person = null;
+
+            socket = io.connect("http://localhost:4000");
+
+            person = prompt("Please enter your name", "Harry Potter");
+
+            socket.on('broadcast', function(message){ 
+                $( "#user_messages" ).append( `<div style='margin-bottom: 10px;'><b>${message.name}: </b>${message.value}</div>`); 
+            }); 
+
+            window.emitDataFromBrowser = function() {
+
+                $("#user_messages" ).append( `<div style='margin-bottom: 10px;'><b>${person}: </b>${document.getElementById("input_data").value}</div>`); 
+
+                socket.emit('createMessage', {
+                    name: person,
+                    value: document.getElementById("input_data").value
+                }); 
+            }
+        </script>
+    </body>
+</html>

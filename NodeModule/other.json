@@ -1,0 +1,10 @@
+{
+    "employee": [{
+        "name": "TechnoFunnel",
+        "age": 10
+    }, {
+        "name": "Anshul",
+        "age": 10,
+        "salary": [10, 20, 30]
+    }]
+}

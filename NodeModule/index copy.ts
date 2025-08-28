@@ -2,10 +2,18 @@ import { readFile } from "fs";
 import path from "path";
 
 const express = require('express');
+const socketIO = require('socket.io'); 
+const http = require('http');
+
+const port = process.env.PORT||4000;
+
 let app = express(); 
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+
+let server = http.createServer(app);
+
+let io = socketIO(server);
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html")
@@ -18,15 +26,15 @@ app.get("/data", (req, res) => {
     })
 })
 
-app.get("/form", (req, res) => {
-    res.sendFile(__dirname + "/form.html")
-})
 
-app.post("/submit", (req, res) => {
-    console.log("post Triggered")
-    console.log(req.body.userName);
-    console.log(req.body.userRole);
-    res.sendFile(__dirname + "/form.html")
-});
+
+io.on('connection', (socket) => { 
+    console.log('New user connected'); 
+
+    socket.on('createMessage', (newMessage) => { 
+        socket.broadcast.emit("broadcast", newMessage)
+    });
+
+}); 
   
-app.listen(3000); 
+server.listen(port); 
